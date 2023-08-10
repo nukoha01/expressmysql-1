@@ -10,6 +10,8 @@ const pool = mysql.createPool({
 
 // BEGINNING OF TEST DB
 let popdb  = {}
+
+/*
 popdb.all = () => {
     return new Promise (( resolve, reject) => {
         pool.query(`SELECT * FROM total_population_all`, (err, results) =>{
@@ -92,9 +94,29 @@ popdb.avg = (nums) => {
     });
 
 };
-
+*/
 //END OF TESTDB
+popdb.one = (msa,year) => {
+    return new Promise (( resolve, reject) => {
+    if(year) {
+        pool.query(`SELECT * FROM mark_msa WHERE msa = ? AND year = ?`,[zipcode,year],(err, results) =>{
+            if(err) {
+                return reject(err);
+            } 
+             return resolve(results);
+        });
+    } else {
+        // 
+        pool.query(`SELECT * FROM total_population_all WHERE msa = ?`, [msa], (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    }
+    });
 
+};
 
 
 
