@@ -29,6 +29,9 @@ router.get('/zip/:zipcode/:year', async (req,res,next) =>{
                 res.sendStatus(500); 
             }
     });
+
+
+/*
     router.get('/zip/:zipcode', async (req, res, next) => {
         try {
             let results = await db.one(req.params.zipcode);
@@ -85,7 +88,7 @@ router.get('/zip/:zipcode/:year', async (req,res,next) =>{
                 res.sendStatus(500); 
             }
         }); 
-
+*/
     //END OF USING TESTDB
 
 
