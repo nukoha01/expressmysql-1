@@ -99,7 +99,7 @@ popdb.avg = (nums) => {
 //END OF TESTDB
 popdb.one = (msa,Product) => {
     return new Promise (( resolve, reject) => {
-    if(year) {
+    if(Product) {
         pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ? AND Product = ?`,[msa,Product],(err, results) =>{
             if(err) {
                 return reject(err);
