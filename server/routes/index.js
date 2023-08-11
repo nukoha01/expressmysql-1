@@ -19,11 +19,11 @@ router.get('/', async (req,res,next) =>{
             }
 });
 */
-router.get('/zip/:zipcode/:year', async (req,res,next) =>{
+router.get('/market/:msa/:Product', async (req,res,next) =>{
 
     //res.json({test: 'test'});
             try {
-                let results = await db.one(req.params.zipcode,req.params.year);
+                let results = await db.one(req.params.msa,req.params.Product);
                 res.json(results);
             } catch(e){
                 console.log(e);
