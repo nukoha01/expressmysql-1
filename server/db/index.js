@@ -162,7 +162,31 @@ popdb.countysum = (county,Product) => {
         });
     }
     });
+};
+
+popdb.countypop = (county) => {
+    return new Promise (( resolve, reject) => {
+        pool.query(`SELECT SUM(total_pop) FROM tex_pop_county WHERE county = ?`,[county],(err, results) =>{
+            if(err) {
+                return reject(err);
+            } 
+             return resolve(results);
+        });
+    });
 
 };
+
+popdb.msapop = (msa) => {
+    return new Promise (( resolve, reject) => {
+        pool.query(`SELECT SUM(total_pop) FROM tex_pop_msa WHERE msa = ?`,[msa],(err, results) =>{
+            if(err) {
+                return reject(err);
+            } 
+             return resolve(results);
+        });
+    });
+
+};
+
 
 module.exports = popdb;
