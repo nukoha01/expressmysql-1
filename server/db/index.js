@@ -10,7 +10,7 @@ const pool = mysql.createPool({
 }); 
 
 // BEGINNING OF TEST DB
-let popdb  = {}
+let popdb  = {} 
 
 /*
 popdb.all = () => {
@@ -120,7 +120,7 @@ popdb.one = (msa,Product) => {
 };
 
 
-popdb.sum = (msa,Product) => {
+popdb.msasum = (msa,Product) => {
     return new Promise (( resolve, reject) => {
     if(Product) { 
         pool.query(`SELECT SUM(premium) FROM tex_sales_msa WHERE msa = ? AND Product = ?`,[msa,Product],(err, results) =>{
@@ -132,6 +132,29 @@ popdb.sum = (msa,Product) => {
     } else {
         // 
         pool.query(`SELECT SUM(premium) FROM tex_sales_msa WHERE msa = ?`, [msa], (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    }
+    });
+
+};
+
+
+popdb.countysum = (county,Product) => {
+    return new Promise (( resolve, reject) => {
+    if(Product) { 
+        pool.query(`SELECT SUM(premium) FROM tex_sales_county WHERE county = ? AND Product = ?`,[county,Product],(err, results) =>{
+            if(err) {
+                return reject(err);
+            } 
+             return resolve(results);
+        });
+    } else {
+        // 
+        pool.query(`SELECT SUM(premium) FROM tex_sales_county WHERE county = ?`, [county], (err, results) => {
             if (err) {
                 return reject(err);
             }
