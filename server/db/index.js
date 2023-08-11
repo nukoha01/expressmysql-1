@@ -96,10 +96,10 @@ popdb.avg = (nums) => {
 };
 */
 //END OF TESTDB
-popdb.one = (msa,year) => {
+popdb.one = (msa,Product) => {
     return new Promise (( resolve, reject) => {
     if(year) {
-        pool.query(`SELECT * FROM mark_msa WHERE msa = ? AND year = ?`,[zipcode,year],(err, results) =>{
+        pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ? AND Product = ?`,[msa,Product],(err, results) =>{
             if(err) {
                 return reject(err);
             } 
@@ -107,7 +107,7 @@ popdb.one = (msa,year) => {
         });
     } else {
         // 
-        pool.query(`SELECT * FROM total_population_all WHERE msa = ?`, [msa], (err, results) => {
+        pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ?`, [msa], (err, results) => {
             if (err) {
                 return reject(err);
             }
