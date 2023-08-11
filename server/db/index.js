@@ -120,5 +120,26 @@ popdb.one = (msa,Product) => {
 };
 
 
+popdb.sum = (msa,Product) => {
+    return new Promise (( resolve, reject) => {
+    if(Product) { 
+        pool.query(`SELECT SUM(premium) FROM tex_sales_msa WHERE msa = ? AND Product = ?`,[msa,Product],(err, results) =>{
+            if(err) {
+                return reject(err);
+            } 
+             return resolve(results);
+        });
+    } else {
+        // 
+        pool.query(`SELECT SUM(premium) FROM tex_sales_msa WHERE msa = ?`, [msa], (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    }
+    });
+
+};
 
 module.exports = popdb;
