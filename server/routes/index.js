@@ -55,6 +55,28 @@ router.get('/countysum/:county/:Product', async (req,res,next) =>{
             }
     });
 
+router.get('/countypop/:county', async (req,res,next) =>{
+
+    //res.json({test: 'test'});
+            try {
+                let results = await db.countypop(req.params.county);
+                res.json(results);
+            } catch(e){
+                console.log(e);
+                res.sendStatus(500); 
+            }
+    });
+router.get('/msapop/:msa', async (req,res,next) =>{
+
+    //res.json({test: 'test'});
+            try {
+                let results = await db.msapop(req.params.msa);
+                res.json(results);
+            } catch(e){
+                console.log(e);
+                res.sendStatus(500); 
+            }
+    });
 
 /*
     router.get('/zip/:zipcode', async (req, res, next) => {
@@ -115,10 +137,5 @@ router.get('/countysum/:county/:Product', async (req,res,next) =>{
         }); 
 */
     //END OF USING TESTDB
-
-
-
- 
-
 
 module.exports = router;
