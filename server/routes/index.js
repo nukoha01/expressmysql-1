@@ -31,6 +31,18 @@ router.get('/market/:msa/:Product', async (req,res,next) =>{
             }
     });
 
+router.get('/sum/:msa/:Product', async (req,res,next) =>{
+
+    //res.json({test: 'test'});
+            try {
+                let results = await db.sum(req.params.msa,req.params.Product);
+                res.json(results);
+            } catch(e){
+                console.log(e);
+                res.sendStatus(500); 
+            }
+    });
+
 
 /*
     router.get('/zip/:zipcode', async (req, res, next) => {
