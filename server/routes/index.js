@@ -31,11 +31,23 @@ router.get('/market/:msa/:Product', async (req,res,next) =>{
             }
     });
 
-router.get('/sum/:msa/:Product', async (req,res,next) =>{
+router.get('/msasum/:msa/:Product', async (req,res,next) =>{
 
     //res.json({test: 'test'});
             try {
-                let results = await db.sum(req.params.msa,req.params.Product);
+                let results = await db.msasum(req.params.msa,req.params.Product);
+                res.json(results);
+            } catch(e){
+                console.log(e);
+                res.sendStatus(500); 
+            }
+    });
+
+router.get('/countysum/:county/:Product', async (req,res,next) =>{
+
+    //res.json({test: 'test'});
+            try {
+                let results = await db.countysum(req.params.county,req.params.Product);
                 res.json(results);
             } catch(e){
                 console.log(e);
