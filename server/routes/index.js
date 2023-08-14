@@ -6,7 +6,7 @@ const db = require('../db');
 const router = express.Router();
 
 //START OF USING TEST DB
-/*
+
 router.get('/', async (req,res,next) =>{
 
 //res.json({test: 'test'});
@@ -18,7 +18,7 @@ router.get('/', async (req,res,next) =>{
                 res.sendStatus(500); 
             }
 });
-*/
+
 router.get('/market/:msa/:Product', async (req,res,next) =>{
 
     //res.json({test: 'test'});
