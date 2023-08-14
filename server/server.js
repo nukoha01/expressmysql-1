@@ -3,7 +3,7 @@ const apiRouter = require('./routes');
 
 const app = express();
 
-const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoic3BpbiIsImlhdCI6MTY5MTk3MjM5M30.O7OzHJfkIxdZSrE2Kxo9-yYvHMLaSulWWcvN5r7jBxU'; // Replace with the token you generated
+const authToken = process.env.AUTH_TOKEN; // Replace with the token you generated
 
 // Middleware to authenticate the token
 const authenticateToken = (req, res, next) => {
