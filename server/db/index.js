@@ -123,26 +123,27 @@ popdb.msasum = (msa, Product) => {
 
 
 
-popdb.countysum = (county,Product) => {
-    return new Promise (( resolve, reject) => {
-    if(Product) { 
-        pool.query(`SELECT SUM(premium) FROM tex_sales_county WHERE county = ? AND Product = ?`,[county,Product],(err, results) =>{
-            if(err) {
-                return reject(err);
-            } 
-             return resolve(results);
-        });
-    } else {
-        // 
-        pool.query(`SELECT SUM(premium) FROM tex_sales_county WHERE county = ?`, [county], (err, results) => {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(results);
-        });
-    }
+popdb.countysum = (county, Product) => {
+    return new Promise((resolve, reject) => {
+        if (Product) {
+            const trimmedProduct = Product.trim(); // Remove leading and trailing whitespace
+            pool.query(`SELECT * FROM tex_sales_county WHERE county = ? AND Product = ?`, [county, trimmedProduct], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+        } else {
+            pool.query(`SELECT * FROM tex_sales_county WHERE msa = ?`, [county], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+        }
     });
 };
+
 
 popdb.countypop = (county) => {
     return new Promise (( resolve, reject) => {
