@@ -50,17 +50,26 @@ router.get('/market/:msa/:Product', async (req,res,next) =>{
             }
         });
 
-router.get('/countysum/:county/:Product', async (req,res,next) =>{
 
-    //res.json({test: 'test'});
-            try {
-                let results = await db.countysum(req.params.county,req.params.Product);
-                res.json(results);
-            } catch(e){
+
+        router.get('/countysum/:county/:Product?', async (req, res, next) => {
+            try { 
+                const county = req.params.county;
+                const Product = req.params.Product;
+        
+                if (Product) {
+                    const trimmedProduct = Product.trim(); // Remove leading and trailing whitespace
+                    const results = await db.countysum(county, trimmedProduct);
+                    res.json(results);
+                } else {
+                    const results = await db.countysum(county);
+                    res.json(results);
+                }
+            } catch (e) {
                 console.log(e);
-                res.sendStatus(500); 
+                res.sendStatus(500);
             }
-    });
+        });
 
 router.get('/countypop/:county', async (req,res,next) =>{
 
