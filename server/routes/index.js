@@ -7,7 +7,7 @@ const router = express.Router();
 
 //START OF USING TEST DB
 
-router.get('/', async (req,res,next) =>{
+router.get('/allprem', async (req,res,next) =>{
 
 //res.json({test: 'test'});
             try {
