@@ -31,17 +31,24 @@ router.get('/market/:msa/:Product', async (req,res,next) =>{
             }
     });
 
-router.get('/msasum/:msa/:Product', async (req,res,next) =>{
-
-    //res.json({test: 'test'});
+        router.get('/msasum/:msa/:Product?', async (req, res, next) => {
             try {
-                let results = await db.msasum(req.params.msa,req.params.Product);
-                res.json(results);
-            } catch(e){
+                const msa = req.params.msa;
+                const Product = req.params.Product;
+        
+                if (Product) {
+                    const trimmedProduct = Product.trim(); // Remove leading and trailing whitespace
+                    const results = await db.msasum(msa, trimmedProduct);
+                    res.json(results);
+                } else {
+                    const results = await db.msasum(msa);
+                    res.json(results);
+                }
+            } catch (e) {
                 console.log(e);
-                res.sendStatus(500); 
+                res.sendStatus(500);
             }
-    });
+        });
 
 router.get('/countysum/:county/:Product', async (req,res,next) =>{
 
