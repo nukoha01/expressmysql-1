@@ -120,27 +120,27 @@ popdb.one = (msa,Product) => {
 };
 
 
-popdb.msasum = (msa,Product) => {
-    return new Promise (( resolve, reject) => {
-    if(Product) { 
-        pool.query(`SELECT SUM(premium) FROM tex_sales_msa WHERE msa = ? AND Product = ?`,[msa,Product],(err, results) =>{
-            if(err) {
-                return reject(err);
-            } 
-             return resolve(results);
-        });
-    } else {
-        // 
-        pool.query(`SELECT SUM(premium) FROM tex_sales_msa WHERE msa = ?`, [msa], (err, results) => {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(results);
-        });
-    }
+popdb.msasum = (msa, Product) => {
+    return new Promise((resolve, reject) => {
+        if (Product) {
+            const trimmedProduct = Product.trim(); // Remove leading and trailing whitespace
+            pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ? AND Product = ?`, [msa, trimmedProduct], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+        } else {
+            pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ?`, [msa], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+        }
     });
-
 };
+
 
 
 popdb.countysum = (county,Product) => {
