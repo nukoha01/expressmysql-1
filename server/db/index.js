@@ -97,27 +97,7 @@ popdb.avg = (nums) => {
 };
 */
 //END OF TESTDB
-popdb.one = (msa,Product) => {
-    return new Promise (( resolve, reject) => {
-    if(Product) {
-        pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ? AND Product = ?`,[msa,Product],(err, results) =>{
-            if(err) {
-                return reject(err);
-            } 
-             return resolve(results);
-        });
-    } else {
-        // 
-        pool.query(`SELECT * FROM tex_sales_msa WHERE msa = ?`, [msa], (err, results) => {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(results);
-        });
-    }
-    });
 
-};
 
 
 popdb.msasum = (msa, Product) => {
