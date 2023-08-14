@@ -12,10 +12,9 @@ const pool = mysql.createPool({
 // BEGINNING OF TEST DB
 let popdb  = {} 
 
-/*
 popdb.all = () => {
     return new Promise (( resolve, reject) => {
-        pool.query(`SELECT * FROM total_population_all`, (err, results) =>{
+        pool.query(`SELECT SUM(premium) FROM tex_sales_msa`, (err, results) =>{
             if(err) {
                 return reject(err);
             } 
@@ -23,6 +22,8 @@ popdb.all = () => {
         });
     });
 };
+
+/*
 
 popdb.one = (zipcode,year) => {
     return new Promise (( resolve, reject) => {
