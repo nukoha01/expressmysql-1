@@ -32,7 +32,7 @@ router.get('/market/:msa/:Product', async (req,res,next) =>{
     });
 
         router.get('/msasum/:msa/:Product?', async (req, res, next) => {
-            try {
+            try { 
                 const msa = req.params.msa;
                 const Product = req.params.Product;
         
