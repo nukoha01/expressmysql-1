@@ -6,8 +6,7 @@ const pool = mysql.createPool({
     user: process.env.DB_USERNAME,
     database: process.env.DB_DBNAME,
     host: process.env.DB_HOST,
-    port: '3306',
-    acquireTimeout: 60000
+    port: '3306'
 }); 
 
 // BEGINNING OF TEST DB
