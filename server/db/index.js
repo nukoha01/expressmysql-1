@@ -135,7 +135,7 @@ popdb.countysum = (county, Product) => {
                 return resolve(results);
             });
         } else {
-            pool.query(`SELECT SUM(premium) as total_amount,, SUM(policies) AS total_amount2 FROM tex_sales_county WHERE county = ?`, [county], (err, results) => {
+            pool.query(`SELECT SUM(premium) as total_amount, SUM(policies) AS total_amount2 FROM tex_sales_county WHERE county = ?`, [county], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
