@@ -128,14 +128,14 @@ popdb.countysum = (county, Product) => {
     return new Promise((resolve, reject) => {
         if (Product) {
             const trimmedProduct = Product.trim(); // Remove leading and trailing whitespace
-            pool.query(`SELECT SUM(premium) as total_amount FROM tex_sales_county WHERE county = ? AND Product = ?`, [county, trimmedProduct], (err, results) => {
+            pool.query(`SELECT SUM(premium) as total_amount, SUM(policies) AS total_amount2 FROM tex_sales_county WHERE county = ? AND Product = ?`, [county, trimmedProduct], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
                 return resolve(results);
             });
         } else {
-            pool.query(`SELECT SUM(premium) as total_amount FROM  tex_sales_county WHERE county = ?`, [county], (err, results) => {
+            pool.query(`SELECT SUM(premium) as total_amount,, SUM(policies) AS total_amount2 FROM tex_sales_county WHERE county = ?`, [county], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
